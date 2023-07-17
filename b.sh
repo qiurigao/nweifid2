@@ -43,5 +43,24 @@ ldflags="\
   export CC=mipsel-openwrt-linux-musl-gcc 
   export GOMIPS=softfloat
   go build -o ./dist/PanIndex -ldflags="$ldflags" -tags=jsoniter .
+
+
+
+  PATH=$PATH:/root/openwrt-sdk-22.03.5-ramips-mt7621_gcc-11.2.0_musl.Linux-x86_64/staging_dir/toolchain-mipsel_24kc_gcc-11.2.0_musl/bin
+export STAGING_DIR=/root/openwrt-sdk-22.03.5-ramips-mt7621_gcc-11.2.0_musl.Linux-x86_64/staging_dir/toolchain-mipsel_24kc_gcc-11.2.0_musl/bin:$STAGING_DIR
+
+export CGO_ENABLED=0
+  export GOOS=linux
+  export GOARCH=mipsle 
+  export CC=mipsel-openwrt-linux-musl-gcc 
+  export CXX=mipsel-openwrt-linux-musl-g++
+  export GOMIPS=softfloat
+
+
+
+go build -ldflags '-s -w --extldflags "-static -fpic"'
+
+
+CGO_ENABLED=0 go build -a -ldflags '-extldflags "-static"'
 	  
 	  
